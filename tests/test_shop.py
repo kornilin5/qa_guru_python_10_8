@@ -4,6 +4,7 @@
 import pytest
 from models import Product, Cart
 
+
 @pytest.fixture
 def cart():
     return Cart()
@@ -57,13 +58,12 @@ class TestCart:
         cart.add_product(product, 10)
         cart.remove_product(product)
         assert product not in cart.products
-        
-        
 
     def test_cart_remove_product(self, cart, product):
         cart.add_product(product, 10)
         cart.remove_product(product, 5)
         assert product in cart.products and cart.products[product] == 5
+
     def test_cart_clear(self, cart, product):
         cart.add_product(product, 10)
         cart.clear()
@@ -73,11 +73,10 @@ class TestCart:
         cart.add_product(product, 10)
         assert cart.get_total_price() == product.price * 10
 
-
     def test_cart_buy(self, cart, product):
         cart.add_product(product, 10)
-        cart.buy()  
-        assert product.quantity == 990  
+        cart.buy()
+        assert product.quantity == 990
 
     def test_cart_buy_value_error(self, cart, product):
         cart.add_product(product, 1001)
