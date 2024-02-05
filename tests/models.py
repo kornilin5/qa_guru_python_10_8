@@ -18,10 +18,7 @@ class Product:
         TODO Верните True если количество продукта больше или равно запрашиваемому
             и False в обратном случае
         """
-        if self.quantity >= quantity:
-            return True
-        else:
-            return False
+        return self.quantity >= quantity
 
     def buy(self, quantity):
         """
@@ -68,12 +65,10 @@ class Cart:
         Если remove_count не передан, то удаляется вся позиция
         Если remove_count больше, чем количество продуктов в позиции, то удаляется вся позиция
         """
-        if remove_count is None:
-            del self.products[product]
-        elif remove_count > self.products[product]:
+        if remove_count is None or remove_count > self.products[product]:
             del self.products[product]
         else:
-            self.products[product] -= remove_count
+            self.products[product] -= remove_countF
 
     def clear(self):
         self.products = {}
@@ -81,7 +76,7 @@ class Cart:
     def get_total_price(self) -> float:
         total_price = 0
         for product, count in self.products.items():
-            total_price = product.price * count
+            total_price += product.price * count
         return total_price
 
     def buy(self):
